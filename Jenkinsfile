@@ -4,10 +4,14 @@ pipeline{
         jdk 'myjava'
         maven 'mymaven'
     }
+     environment {
+  giturl = "https://github.com/kliakos/sparkjava-war-example.git"
+}
+
     stages{
         stage('checkout'){
             steps{
-            checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/kliakos/sparkjava-war-example.git']])
+            checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: '$giturl']])
         }
         }
         stage('create artifact by using mvn'){
